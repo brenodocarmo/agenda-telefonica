@@ -127,7 +127,7 @@ class Agenda(Clear):
         root.mainloop()
 
     def tela(self):
-        self.root.title("Agenda Telefônica")
+        self.root.title("Agenda Telefonica")
         self.root.configure(bg="#dcdcdc")
         self.root.geometry("700x500")
         self.root.resizable(True, True)
