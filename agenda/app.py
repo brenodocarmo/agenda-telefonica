@@ -1,116 +1,10 @@
 from tkinter import *
 from tkinter import ttk
-import sqlite3
+# import sqlite3
 #from agendaBD import *
-
+from func import Clear
 
 root = Tk()
-
-class Clear():
-
-    def clear_display(self):
-        self.codigo_entry.delete(0, END)
-        self.nome_entry.delete(0, END)
-        self.fone_entry.delete(0, END)
-        self.email_entry.delete(0, END)
-
-    def conect_db(self):
-        self.conn = sqlite3.connect("clientes.db")
-        self.cursor = self.conn.cursor(); print("Conectando ao banco de dados")
-    
-    def desconectar_bd(self):
-        self.conn.close(); print("Desconectando banco de dados")
-    
-    def montaTabelas(self):
-        self.conect_db(); 
-        # Criar Tabelas
-        self.cursor.execute("""
-            CREATE TABLE IF NOT EXISTS cliente(
-                cod INTEGER PRIMARY KEY,
-                nome_cliente CHAR(50) NOT NULL,
-                telefone INTEGER(20)NOT NULL,
-                email CHAR(40) NOT NULL
-            );
-        """)
-        self.conn.commit(); print("Banco e Dados criado")
-        self.desconectar_bd()
-
-    def variaveis(self):
-        self.codigo = self.codigo_entry.get()
-        self.nome = self.nome_entry.get()
-        self.fone = self.fone_entry.get()
-        self.email = self.email_entry.get()
-
-    def add_cliente(self):
-        self.variaveis()
-        self.conect_db()
-
-        self.cursor.execute("""
-            INSERT INTO cliente(nome_cliente, telefone, email)
-            VALUES(?,?,?)""", (self.nome, self.fone, self.email))
-        
-        self.conn.commit()
-        self.desconectar_bd()
-        self.select_lista()
-        self.clear_display()
-
-    def select_lista(self):
-        self.listaCli.delete(*self.listaCli.get_children())
-        self.conect_db()
-        lista = self.cursor.execute("""SELECT cod, nome_cliente, telefone, email FROM cliente ORDER BY nome_cliente;""")
-        for i in lista:
-            self.listaCli.insert("", END, values=i)
-        self.desconectar_bd()
-
-    def onDoubleclick(self, event):
-        self.clear_display()
-        self.listaCli.selection()
-
-        for n in self.listaCli.selection():
-            col1, col2, col3, col4 = self.listaCli.item(n, "values")
-            self.codigo_entry.insert(END, col1)
-            self.nome_entry.insert(END, col2)
-            self.fone_entry.insert(END, col3)
-            self.email_entry.insert(END, col4)
-    
-    def deleta_cliente(self):
-        self.variaveis()
-        self.conect_db()
-        self.cursor.execute("""
-            DELETE FROM cliente WHERE cod=?
-        """,(self.codigo))
-        self.conn.commit()
-        self.clear_display()
-        self.select_lista()
-
-    def altera_cliente(self):
-        self.variaveis()
-        self.conect_db()
-        self.cursor.execute("""
-            UPDATE cliente SET nome_cliente=?, telefone=?, email=?
-            WHERE cod=?
-        """,(self.nome, self.fone, self.email, self.codigo))
-        self.conn.commit()
-        self.desconectar_bd()
-        self.select_lista()
-        self.clear_display()
-
-    def busca_cliente(self):
-        self.conect_db()
-        self.listaCli.delete(*self.listaCli.get_children())
-        self.nome_entry.insert(END, '%')
-        nome = self.nome_entry.get()
-        self.cursor.execute("""
-            SELECT cod, nome_cliente, telefone, email FROM cliente
-            WHERE nome_cliente LIKE '%s' ORDER BY nome_cliente ASC
-        """% nome)
-        buscanomeCli = self.cursor.fetchall()
-        for i in buscanomeCli:
-            self.listaCli.insert("", END, values=i)
-        self.clear_display()
-
-        self.desconectar_bd()
-
 
 
 class Agenda(Clear):
@@ -235,15 +129,15 @@ class Agenda(Clear):
         menubar = Menu(self.root)
         self.root.config(menu=menubar)
         filemenu = Menu(menubar)
-        filemenu2 = Menu(menubar)
+        # filemenu2 = Menu(menubar)
 
         def quit(): 
             self.root.destroy()
 
         menubar.add_cascade(label="Opções", menu=filemenu)
-        menubar.add_cascade(label="Sobre", menu=filemenu2)
+        # menubar.add_cascade(label="Sobre", menu=filemenu2)
 
         filemenu.add_command(label="Sair", command=quit)
-        filemenu2.add_command(label="Limpar Cliente", command=self.clear_display)
+        # filemenu2.add_command(label="Limpar Cliente", command=self.clear_display)
 
 Agenda()
