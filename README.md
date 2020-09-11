@@ -17,3 +17,9 @@ O objetivo inicial desse projeto é construir uma agenda telefonica com python. 
   <img src="https://github.com/brenodocarmo/agenda-telefonica/blob/master/screenshot_11.png" width="500"/>
 </p>
 
+## Como Baixar
+1° Se você estiver o git instalado na sua máquina, você poderá executar o seguinte comando:
+```
+git clone https://github.com/brenodocarmo/agenda-telefonica.git
+```
+
