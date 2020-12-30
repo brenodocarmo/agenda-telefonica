@@ -7,7 +7,7 @@
 # **Agenda telefônica**
 
 
-O objetivo inicial desse projeto é construir uma agenda telefonica com python. A biblioteca que utilizaremos será o [Tkinter](https://docs.python.org/3/library/tkinter.html), ela permite criar e desenvolver interfaces gráficas, além disso a facilidade no uso de seus recursos é um ponto positivo, pois ela já é nativo do python. Vamos utilizar também a biblioteca [SQLite](https://www.sqlite.org/index.html) para armazenar as infomações que o usuário for inserir no nosso programa.
+O objetivo inicial desse projeto é construir uma agenda telefonica com python. A biblioteca que utilizaremos será o [Tkinter](https://docs.python.org/3/library/tkinter.html), ela permite criar e desenvolver interfaces gráficas, além disso a facilidade no uso de seus recursos é um ponto positivo, pois ela já é nativa do python. Vamos utilizar também a biblioteca [SQLite] como Banco de Dados principal(https://www.sqlite.org/index.html) para armazenar todas as infomações que o usuário for inserir no nosso programa.
 
 <br /><br />
 
